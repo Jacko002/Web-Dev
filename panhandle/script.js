@@ -15,8 +15,8 @@
 
   document.querySelectorAll('.nav-link').forEach(function (link) {
     link.addEventListener('click', function () {
-      nav.classList.remove('is-open');
-      menuBtn.classList.remove('is-active');
+      if (nav) nav.classList.remove('is-open');
+      if (menuBtn) menuBtn.classList.remove('is-active');
     });
   });
 

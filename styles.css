@@ -114,6 +114,11 @@ body {
   border-bottom-color: var(--border-accent);
 }
 
+.header.scrolled {
+  background: rgba(5, 5, 8, 0.92);
+  border-bottom-color: var(--border-accent);
+}
+
 .logo {
   font-family: var(--font-display);
   font-weight: 700;

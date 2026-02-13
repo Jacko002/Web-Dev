@@ -16,11 +16,11 @@
     });
   }
 
-  // Close menu when clicking a nav link (mobile)
+  // Close menu when clicking a nav link (mobile); safe when menu elements are missing
   document.querySelectorAll('.nav-link').forEach(function (link) {
     link.addEventListener('click', function () {
-      nav.classList.remove('is-open');
-      menuBtn.classList.remove('is-active');
+      if (nav) nav.classList.remove('is-open');
+      if (menuBtn) menuBtn.classList.remove('is-active');
       document.body.classList.remove('menu-open');
     });
   });
