@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Designer & Developer</title>
+  <meta name="description" content="Personal website and portfolio">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="grid-bg"></div>
+
+  <header class="header">
+    <a href="#" class="logo">
+      <span class="logo-bracket">[</span>
+      <span class="logo-text">DEV</span>
+      <span class="logo-bracket">]</span>
+    </a>
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link nav-link--cta">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-label">
+        <span class="pulse"></span>
+        Available for new opportunities
+      </p>
+      <h1 class="hero-title">
+        <span class="hero-line">Building the</span>
+        <span class="hero-line hero-line--accent">future</span>
+        <span class="hero-line">one pixel at a time.</span>
+      </h1>
+      <p class="hero-desc">
+        Designer & developer crafting digital experiences at the intersection of 
+        aesthetics and technology.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-visual">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <span class="section-tag">01 — About</span>
+      <div class="about-grid">
+        <div class="about-content">
+          <h2 class="section-title">Engineer of digital experiences</h2>
+          <p class="about-text">
+            I specialize in creating interfaces and systems that feel both cutting-edge 
+            and human. From concept to code, I focus on clarity, performance, and 
+            that intangible quality that makes a product feel alive.
+          </p>
+          <p class="about-text">
+            When I'm not shipping code, you'll find me exploring new tools, 
+            contributing to open source, or thinking about the next big interface 
+            paradigm.
+          </p>
+          <ul class="about-stack">
+            <li>TypeScript / React</li>
+            <li>Node.js / APIs</li>
+            <li>Design Systems</li>
+            <li>Animation & Motion</li>
+          </ul>
+        </div>
+        <div class="about-visual">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-title">~/about</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line"><span class="prompt">$</span> whoami</div>
+              <div class="terminal-line output">creative-developer</div>
+              <div class="terminal-line"><span class="prompt">$</span> cat interests.txt</div>
+              <div class="terminal-line output">ui_ux • systems • typography • sci-fi</div>
+              <div class="terminal-line"><span class="prompt">$</span> <span class="cursor">_</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section work">
+      <span class="section-tag">02 — Experience</span>
+      <h2 class="section-title">Where I've shipped</h2>
+      <div class="timeline">
+        <article class="timeline-item">
+          <span class="timeline-date">2023 — Present</span>
+          <h3 class="timeline-role">Senior Developer</h3>
+          <p class="timeline-company">Tech Company</p>
+          <p class="timeline-desc">Leading frontend architecture and design system implementation.</p>
+        </article>
+        <article class="timeline-item">
+          <span class="timeline-date">2021 — 2023</span>
+          <h3 class="timeline-role">Full Stack Developer</h3>
+          <p class="timeline-company">Startup Inc</p>
+          <p class="timeline-desc">Built products from zero to launch with React and Node.</p>
+        </article>
+        <article class="timeline-item">
+          <span class="timeline-date">2019 — 2021</span>
+          <h3 class="timeline-role">Frontend Developer</h3>
+          <p class="timeline-company">Agency Co</p>
+          <p class="timeline-desc">Crafted marketing sites and web apps for global brands.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects">
+      <span class="section-tag">03 — Projects</span>
+      <h2 class="section-title">Selected work</h2>
+      <div class="project-grid">
+        <a href="#" class="project-card">
+          <div class="project-card-glow"></div>
+          <span class="project-num">01</span>
+          <h3 class="project-title">Nexus Dashboard</h3>
+          <p class="project-desc">Real-time analytics platform with custom data viz.</p>
+          <span class="project-arrow">→</span>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-glow"></div>
+          <span class="project-num">02</span>
+          <h3 class="project-title">Quantum App</h3>
+          <p class="project-desc">Experimental UI framework for reactive interfaces.</p>
+          <span class="project-arrow">→</span>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-glow"></div>
+          <span class="project-num">03</span>
+          <h3 class="project-title">Orbit Design System</h3>
+          <p class="project-desc">Component library and design tokens for scale.</p>
+          <span class="project-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <span class="section-tag">04 — Contact</span>
+      <h2 class="section-title">Let's build something</h2>
+      <p class="contact-desc">
+        Have a project in mind or just want to say hi? I'm always open to 
+        interesting conversations and new opportunities.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:hello@example.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">hello@example.com</span>
+        </a>
+        <a href="https://twitter.com" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-label">Twitter</span>
+          <span class="contact-link-value">@yourhandle</span>
+        </a>
+        <a href="https://github.com" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/you</span>
+        </a>
+        <a href="https://linkedin.com" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/you</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Designed & built with care. © <span id="year"></span></p>
+    <p class="footer-tag">[ Ready for the future ]</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
