@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { updateCurrentUserPlan } from '@/app/actions/profile';
 import type { PlanTier } from '@/lib/types';
@@ -9,7 +8,6 @@ import type { PlanTier } from '@/lib/types';
 const PLAN_KEY = 'plan';
 
 export function LoginForm() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -18,30 +16,35 @@ export function LoginForm() {
     setError(null);
     setLoading(true);
 
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
+    try {
+      const form = e.currentTarget;
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+      const password = (form.elements.namedItem('password') as HTMLInputElement).value;
 
-    const supabase = createClient();
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      const supabase = createClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
 
-    if (signInError) {
-      setError(signInError.message);
-      setLoading(false);
-      return;
-    }
-
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(PLAN_KEY);
-      if (stored === 'free' || stored === 'pro') {
-        await updateCurrentUserPlan(stored);
-        localStorage.removeItem(PLAN_KEY);
+      if (signInError) {
+        setError(signInError.message);
+        return;
       }
-    }
 
-    router.refresh();
-    router.push('/app');
-    setLoading(false);
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem(PLAN_KEY);
+        if (stored === 'free' || stored === 'pro') {
+          await updateCurrentUserPlan(stored);
+          localStorage.removeItem(PLAN_KEY);
+        }
+      }
+
+      // Full page redirect so the session cookie is sent on the next request
+      window.location.href = '/app';
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Check the console and try again.';
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { upsertProfile } from '@/app/actions/profile';
 import type { PlanTier } from '@/lib/types';
@@ -9,7 +8,6 @@ import type { PlanTier } from '@/lib/types';
 const PLAN_KEY = 'plan';
 
 export function SignupForm() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -18,41 +16,51 @@ export function SignupForm() {
     setError(null);
     setLoading(true);
 
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-    const password = (form.elements.namedItem('password') as HTMLInputElement).value;
-
-    const supabase = createClient();
-    const { data: { user }, error: signUpError } = await supabase.auth.signUp({ email, password });
-
-    if (signUpError) {
-      setError(signUpError.message);
-      setLoading(false);
-      return;
-    }
-
-    if (!user) {
-      setError('Sign up failed. Please try again.');
-      setLoading(false);
-      return;
-    }
-
-    let planTier: PlanTier = 'free';
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(PLAN_KEY);
-      if (stored === 'free' || stored === 'pro') planTier = stored;
-      localStorage.removeItem(PLAN_KEY);
-    }
-
     try {
-      await upsertProfile(user.id, { plan_tier: planTier });
-    } catch {
-      setError('Account created but plan could not be saved. You can continue.');
-    }
+      const form = e.currentTarget;
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+      const password = (form.elements.namedItem('password') as HTMLInputElement).value;
 
-    router.refresh();
-    router.push('/app');
-    setLoading(false);
+      const supabase = createClient();
+      const { data: { user, session }, error: signUpError } = await supabase.auth.signUp({ email, password });
+
+      if (signUpError) {
+        setError(signUpError.message);
+        return;
+      }
+
+      if (!user) {
+        setError('Sign up failed. Please try again.');
+        return;
+      }
+
+      // If email confirmation is required, session is null — show message instead of redirecting
+      if (!session) {
+        setError('Account created. Check your email to confirm, then log in.');
+        return;
+      }
+
+      let planTier: PlanTier = 'free';
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem(PLAN_KEY);
+        if (stored === 'free' || stored === 'pro') planTier = stored;
+        localStorage.removeItem(PLAN_KEY);
+      }
+
+      try {
+        await upsertProfile(user.id, { plan_tier: planTier });
+      } catch {
+        setError('Account created but plan could not be saved. You can continue.');
+      }
+
+      // Full page redirect so the session cookie is sent on the next request
+      window.location.href = '/app';
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Check the console and try again.';
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
